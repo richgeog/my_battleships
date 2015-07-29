@@ -12,9 +12,3 @@ describe Ship do
   end
 
 end
-
-#   it 'has a position when created' do
-#     ship = Ship.new 'A1'
-#     expect(ship.position).not_to eq nil
-#   end
-# end

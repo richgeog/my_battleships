@@ -7,7 +7,7 @@ describe Board do
 
   it 'can have a ship' do
     subject.place_ship(patrol_boat, :B1, :S)
-    expect(subject.grid).to include patrol_boat
+    expect(subject.ships).to include patrol_boat
   end
 
   describe '#locate_ship?' do
@@ -24,6 +24,12 @@ describe Board do
     #     expect(subject.locate_ship(patrol_boat)).to eq [:A2, :A3]
     #   end
     # end
+
+    context 'after placing a ship' do
+      it 'cannot be placed with an invalid direction' do
+        expect{subject.place_ship(destroyer, :D5, :M)}.to raise_error "Invalid direction. Please choose between N, S, W, E."
+      end
+    end
 
     context 'after placing a destroyer facing south' do
       it 'returns the correct three squares' do

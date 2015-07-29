@@ -1,19 +1,24 @@
 class Board
 
-  attr_reader :grid
+  attr_reader :ships
 
   def initialize
-    @grid = {}
+    @ships = {}
   end
 
   def place_ship ship, location, direction
-    squares = occupies_squares(ship, location, direction)
-    grid.store(ship, squares)
+    occupied_squares = occupies_squares(ship, location, direction)
+    ships.store(ship, occupied_squares)
   end
 
   def occupies_squares ship, location, direction
     starting_square = location
     squares = [starting_square]
+    direction = direction.to_sym.upcase
+
+    unless [:N,:S,:E,:W].include?(direction)
+      raise "Invalid direction. Please choose between N, S, W, E."
+    end
 
     if direction == :S
       x = 0
@@ -58,16 +63,16 @@ class Board
         x += 1
       end
     end
-    
+
     squares
   end
 
   def locate_ship ship
-    grid[ship]
+    ships[ship] # array of symbols, it's the value of the key ship in the hash
   end
 
   def ship_size type
     sizes = {patrol_boat: 2, destroyer: 3, submarine: 3, battleship: 4, aircraft_carrier: 5}
-    sizes[type]
+    sizes[type] # whatever the size for that type
   end
 end
