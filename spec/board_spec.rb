@@ -39,6 +39,20 @@ describe Board do
       end
     end
 
+    context 'after placing a destroyer facing east' do
+      it 'returns the correct three squares' do
+        subject.place_ship(destroyer, :A1, :E)
+        expect(subject.locate_ship(destroyer)).to eq [:A1, :B1, :C1]
+      end
+    end
+
+    context 'after placing a destroyer facing west' do
+      it 'returns the correct three squares' do
+        subject.place_ship(destroyer, :C3, :W)
+        expect(subject.locate_ship(destroyer)).to eq [:C3, :B3, :A3]
+      end
+    end
+
   end
 
 end
