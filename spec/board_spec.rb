@@ -76,7 +76,14 @@ describe Board do
     it 'removes the hit coordinate from the occupied squares' do
       subject.place_ship(destroyer, :C3, :W)
       subject.fire_at :C3
-      expect(subject.ships.values).to eq [:B3, :A3]
+      expect(subject.ships.values).to eq [[:B3, :A3]]
+    end
+    it 'sinks a ship when all occupied squares have been hit' do
+      subject.place_ship(destroyer, :C3, :W)
+      subject.fire_at :C3
+      subject.fire_at :B3
+      subject.fire_at :A3
+      expect(subject.ships).to be_empty
     end
 
   end

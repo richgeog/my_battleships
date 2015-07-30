@@ -83,17 +83,24 @@ class Board
 
   def fire_at coordinates
      if ships.values.flatten.include?(coordinates)
-    #   ships.each{ |key, array| array - [coordinates]}
+        ships.each { |k, v| v.delete(coordinates) }
       "Hit!"
     else
       "Miss!"
     end
-
-    # if "Hit!"
-    #   ships.values.flatten.delete(coordinates)
-    # end
   end
 
-
+  def sunk?
+    # ships.delete_if { |k, v| v.empty? }
+    sunk  = false
+    ships.each do |k, v|
+     if v.empty?
+      sunk = true
+    else
+      false
+  end
+end
+  sunk
+end
 
 end
