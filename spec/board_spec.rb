@@ -62,6 +62,22 @@ describe Board do
         expect(subject.locate_ship(destroyer)).to eq [:C3, :B3, :A3]
       end
     end
+  end
+  describe 'when ships are fired upon' do
+    it 'reports a hit' do
+      subject.place_ship(destroyer, :C3, :W)
+      expect(subject.fire_at(:B3)).to eq "Hit!"
+    end
+
+    it 'reports a miss' do
+      subject.place_ship(destroyer, :C3, :W)
+      expect(subject.fire_at(:H3)).to eq "Miss!"
+    end
+    it 'removes the hit coordinate from the occupied squares' do
+      subject.place_ship(destroyer, :C3, :W)
+      subject.fire_at :C3
+      expect(subject.ships.values).to eq [:B3, :A3]
+    end
 
   end
 

@@ -72,10 +72,6 @@ class Board
     squares
   end
 
-  def overlaps?
-
-  end
-
   def locate_ship ship
     ships[ship] # array of symbols, it's the value of the key ship in the hash
   end
@@ -84,4 +80,20 @@ class Board
     sizes = {patrol_boat: 2, destroyer: 3, submarine: 3, battleship: 4, aircraft_carrier: 5}
     sizes[type] # whatever the size for that type
   end
+
+  def fire_at coordinates
+     if ships.values.flatten.include?(coordinates)
+    #   ships.each{ |key, array| array - [coordinates]}
+      "Hit!"
+    else
+      "Miss!"
+    end
+
+    # if "Hit!"
+    #   ships.values.flatten.delete(coordinates)
+    # end
+  end
+
+
+
 end
