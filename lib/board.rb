@@ -8,6 +8,9 @@ class Board
 
   def place_ship ship, location, direction
     occupied_squares = occupies_squares(ship, location, direction)
+    unless (ships.values.flatten & occupied_squares).empty?
+      raise "Ships cannot overlap"
+    end
     ships.store(ship, occupied_squares)
   end
 
@@ -15,6 +18,8 @@ class Board
     starting_square = location
     squares = [starting_square]
     direction = direction.to_sym.upcase
+
+    # NB! might make a separate method that checks all positioning conditions
 
     unless [:N,:S,:E,:W].include?(direction)
       raise "Invalid direction. Please choose between N, S, W, E."
@@ -65,6 +70,10 @@ class Board
     end
 
     squares
+  end
+
+  def overlaps?
+
   end
 
   def locate_ship ship

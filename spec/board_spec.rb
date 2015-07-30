@@ -25,9 +25,13 @@ describe Board do
     #   end
     # end
 
-    context 'after placing a ship' do
+    context 'when placing a ship' do
       it 'cannot be placed with an invalid direction' do
         expect{subject.place_ship(destroyer, :D5, :M)}.to raise_error "Invalid direction. Please choose between N, S, W, E."
+      end
+      it 'cannot overlap with other ships' do
+        subject.place_ship(destroyer, :D5, :S)
+        expect{subject.place_ship(patrol_boat, :C6, :E)}.to raise_error "Ships cannot overlap"
       end
     end
 
